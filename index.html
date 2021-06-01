@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143196243-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-143196243-1');
+
+        gtag('event', 'play', {
+            'event_category': 'Server Name',
+            'event_action': 'Server',
+            'event_label': window.location.hostname
+        });
+        gtag('event', 'play', {
+            'event_category': 'Page Name',
+            'event_action': 'Page',
+            'event_label': 'count.html'
+        });
+    </script>
+    <!-- End Google Analytics -->
+    <title>Pengumuman SBMPTN LTMPT 2021</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap">
+</head>
+
+<body>
+
+    <div class="count ">
+        <div id="countdown">
+            <div class="date">
+                <div class="smalltext ">HARI</div>
+                <span class="hari">1</span>
+            </div>
+            <div class="date-div">
+                </br>
+                </br>
+                <span class="divider">:</span>
+            </div>
+            <div class="date">
+                <div class="smalltext ">JAM</div>
+                <span class="jam"></span>
+            </div>
+            <div class="date-div">
+                </br>
+                </br>
+                <span class="divider">:</span>
+            </div>
+            <div class="date">
+                <div class="smalltext ">MENIT</div>
+                <span class="menit"></span>
+            </div>
+            <div class="date-div">
+                </br>
+                </br>
+                <span class="divider">:</span>
+            </div>
+            <div class="date">
+                <div class="smalltext ">DETIK</div>
+                <span class="detik"></span>
+            </div>
+        </div>
+        <div class="text-count">
+            <div class="title">
+                HASIL SELEKSI SBMPTN 2021
+            </div>
+            <div class="dateopen">
+                DIBUKA TANGGAL 14 JUNI 2021 08:00 UTC
+            </div>
+        </div>
+        <div id='jam'></div>
+    </div>
+    <script type='text/javascript' src="deadline.js"></script>
+    <script type="text/javascript">
+        var countglobal = 0;
+        var currenttime;
+        var deadline;
+
+        function getTimeRemaining(endtime) {
+            var saiki = new Date(Date.parse(sbmptn_current_time) + countglobal);
+            document.getElementById('jam').innerHTML = saiki.toString();
+            var t = Date.parse(endtime) - saiki;
+            //console.log(countglobal);
+            //console.log(t);
+            //console.log(saiki);
+            //console.log(endtime);
+            //console.log(sbmptn_current_time);
+            var seconds = Math.floor((t / 1000) % 60);
+            var minutes = Math.floor((t / 1000 / 60) % 60);
+            var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            var days = Math.floor(t / (1000 * 60 * 60 * 24));
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+
+        function initializeClock(id, endtime) {
+            var clock = document.getElementById(id);
+            var daysSpan = clock.querySelector('.hari');
+            var hoursSpan = clock.querySelector('.jam');
+            var minutesSpan = clock.querySelector('.menit');
+            var secondsSpan = clock.querySelector('.detik');
+
+            function updateClock() {
+                countglobal = countglobal + 1000;
+                var t = getTimeRemaining(endtime);
+
+                daysSpan.innerHTML = t.days;
+                hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                if (t.total <= 0) {
+                    window.location.href = '';
+                    clearInterval(timeinterval);
+                }
+            }
+
+            updateClock();
+            var timeinterval = setInterval(updateClock, 1000);
+        }
+
+        deadline = new Date(Date.parse(sbmptn_deadline_time));
+        currentime = new Date(Date.parse(sbmptn_current_time));
+        initializeClock('countdown', deadline);
+    </script>
+
+    <noscript>
+    <meta http-equiv="refresh" content="0; url=/nojs.html" />
+</noscript>
+
+</body>
+
+</html>
