@@ -1,1 +1,3 @@
-Countdown SBMPTN 2021
+# Countdown SBMPTN 2021
+
+Merupakan website cloning countdown dari website resmi pengumuman UTBK-SBMPTN LTMPT.
